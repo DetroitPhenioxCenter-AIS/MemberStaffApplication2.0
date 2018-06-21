@@ -1,0 +1,24 @@
+<?php
+	$conn=mysqli_connect('127.0.0.1','root','');
+	
+	mysqli_select_db($conn,'userbase');
+		
+	if(isset($_POST['addevent']))
+   {
+	$name=mysqli_escape_string($conn,$_POST['eventn']);
+	$date=mysqli_escape_string($conn,$_POST['eventd']);
+	$venue=mysqli_escape_string($conn,$_POST['eventv']);
+	$description=mysqli_escape_string($conn,$_POST['eventdn']);
+	$upload_image=$_FILES[" eventi "][ "name" ];
+    $folder="/xampp/htdocs/TEST/images/";
+    move_uploaded_file($_FILES[" eventi "][" tmp_name "], "$folder".$_FILES[" eventi "][" name "]);
+	//$insert_path="INSERT INTO image_table VALUES('$folder','$upload_image')";
+	//$var=mysqli_query($inser_path);
+	$sql2 = "INSERT INTO Events(Name,Edate,Venue,Description,UploadImage) VALUES ('$name','$date','$venue','$description','$upload_image')";
+	mysqli_query($conn,$sql2);
+	echo'image uploaded';
+
+
+
+
+?>
